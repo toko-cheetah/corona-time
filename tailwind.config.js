@@ -6,7 +6,12 @@ module.exports = {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                inter: ["Inter", "sans-serif"],
+                firago: ["FiraGO", "sans-serif"],
+            },
+        },
     },
     plugins: [],
 };

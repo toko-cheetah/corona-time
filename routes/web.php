@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'register.create')->name('register.page');
+
+Route::get('change-locale/{locale}', [LanguageController::class, 'change'])->name('locale.change');

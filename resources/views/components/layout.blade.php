@@ -10,7 +10,7 @@
     <title>Coronatime</title>
 </head>
 
-<body class="box-border m-auto w-96 lg:ml-6 xl:ml-24 {{ Config::get('app.locale') == 'en' ? 'font-inter' : 'font-firago' }}">
+<body class="box-border m-auto pt-5 lg:mx-6 xl:mx-24 {{ Config::get('app.locale') == 'en' ? 'font-inter' : 'font-firago' }}">
     {{ $slot }}
 </body>
 </html>

@@ -11,6 +11,9 @@ module.exports = {
                 inter: ["Inter", "sans-serif"],
                 firago: ["FiraGO", "sans-serif"],
             },
+            width: {
+                "screen-3/4": "75vw",
+            },
         },
     },
     plugins: [],

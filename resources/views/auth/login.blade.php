@@ -26,7 +26,7 @@
                 <x-form.label name='remember'>{{ __('login.remember_this_device') }}</x-form.label>
             </div>
     
-            <a href="#" class="text-right text-blue-800">{{ __('login.forgot_password') }}?</a>
+            <a href="{{ route('password.request') }}" class="text-right text-blue-800">{{ __('login.forgot_password') }}?</a>
         </div>
 
         <x-form.button>{{ __('login.log_in') }}</x-form.button>

@@ -1,7 +1,7 @@
 @props(['name', 'value'])
 
-<input 
-    class="w-5 h-5 align-middle"
+<input
+    class="cursor-pointer"
     name="{{ $name }}"
     id="{{ $name }}"
     type="checkbox"

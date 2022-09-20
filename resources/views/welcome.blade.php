@@ -9,5 +9,10 @@
 </head>
 <body>
     <h1 class="text-center">hello</h1>
+
+    <form action="{{ route('logout') }}" method="post" class="text-center">
+        @csrf
+        <button type="submit">logout</button>
+    </form>
 </body>
 </html>

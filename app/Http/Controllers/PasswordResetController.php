@@ -15,7 +15,6 @@ class PasswordResetController extends Controller
 {
 	public function send(PasswordResetRequest $request): RedirectResponse
 	{
-		$request->validated();
 		$status = Password::sendResetLink(
 			$request->only('email')
 		);
@@ -32,7 +31,6 @@ class PasswordResetController extends Controller
 
 	public function update(PasswordUpdateRequest $request): RedirectResponse
 	{
-		$request->validated();
 		$status = Password::reset(
 			$request->only('email', 'password', 'password_confirmation', 'token'),
 			function ($user, $password) {

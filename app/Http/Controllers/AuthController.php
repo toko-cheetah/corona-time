@@ -21,7 +21,12 @@ class AuthController extends Controller
 
 	public function login(LoginRequest $request): RedirectResponse
 	{
-		if (auth()->attempt($request->getCredentials(), $request->remember))
+		$logintype = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+		if (auth()->attempt([
+			$logintype => $request->username,
+			'password' => $request->password,
+		]))
 		{
 			$request->session()->regenerate();
 			return redirect()->route('home');

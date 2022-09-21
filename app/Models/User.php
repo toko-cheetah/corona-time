@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\PasswordResetNotification;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,5 +53,17 @@ class User extends Authenticatable implements MustVerifyEmail
 	public function setPasswordAttribute($password): string
 	{
 		return $this->attributes['password'] = bcrypt($password);
+	}
+
+	/**
+	 * Send a password reset notification to the user.
+	 *
+	 * @param string $token
+	 *
+	 * @return void
+	 */
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new PasswordResetNotification($token));
 	}
 }

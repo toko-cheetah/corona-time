@@ -26,7 +26,7 @@ class AuthController extends Controller
 		if (auth()->attempt([
 			$logintype => $request->username,
 			'password' => $request->password,
-		]))
+		], $request->remember))
 		{
 			$request->session()->regenerate();
 			return redirect()->route('home');

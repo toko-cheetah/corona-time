@@ -3,28 +3,37 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The model to policy mappings for the application.
-     *
-     * @var array<class-string, class-string>
-     */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-    ];
+	/**
+	 * The model to policy mappings for the application.
+	 *
+	 * @var array<class-string, class-string>
+	 */
+	protected $policies = [
+		// 'App\Models\Model' => 'App\Policies\ModelPolicy',
+	];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->registerPolicies();
+	/**
+	 * Register any authentication / authorization services.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		$this->registerPolicies();
 
-        //
-    }
+		VerifyEmail::toMailUsing(function ($notifiable, $url) {
+			return (new MailMessage)
+				->subject(__('mail-message.verify_email_address'))
+				->greeting(__('mail-message.confirmation_email'))
+				->line(__('mail-message.click_to_verify_email'))
+				->action(__('mail-message.verify_email'), $url);
+		});
+	}
 }

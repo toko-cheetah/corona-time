@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'dashboard.worldwide')->name('home')->middleware(['auth', 'verified']);
+Route::get('/', [DashboardController::class, 'showWorldwide'])->name('home')->middleware(['auth', 'verified']);
 
 Route::middleware('guest')->group(function () {
 	Route::view('/register', 'auth.register')->name('register.page');

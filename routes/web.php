@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home')->middleware(['auth', 'verified']);
+Route::view('/', 'dashboard.worldwide')->name('home')->middleware(['auth', 'verified']);
 
 Route::middleware('guest')->group(function () {
 	Route::view('/register', 'auth.register')->name('register.page');

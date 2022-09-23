@@ -21,10 +21,10 @@ class AuthController extends Controller
 
 	public function login(LoginRequest $request): RedirectResponse
 	{
-		$logintype = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+		$loginType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
 		if (auth()->attempt([
-			$logintype => $request->username,
+			$loginType => $request->username,
 			'password' => $request->password,
 		], $request->remember))
 		{

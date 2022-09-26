@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
 	 */
 	protected function schedule(Schedule $schedule)
 	{
+		$schedule->command('schedule:run')->everyMinute();
 		$schedule->command('auth:clear-resets')->everyFifteenMinutes();
 		$schedule->command('command:get-covid-statistics-data')->daily();
 	}

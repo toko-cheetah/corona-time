@@ -18,7 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'showWorldwide'])->name('home')->middleware(['auth', 'verified']);
+Route::group(['controller' => DashboardController::class], function () {
+	Route::middleware(['auth', 'verified'])->group(function () {
+		Route::get('/', 'showWorldwide')->name('home');
+		Route::get('/by-country', 'showByCountry')->name('home.by_country');
+	});
+});
 
 Route::middleware('guest')->group(function () {
 	Route::view('/register', 'auth.register')->name('register.page');

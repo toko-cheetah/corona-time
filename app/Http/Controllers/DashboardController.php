@@ -23,35 +23,27 @@ class DashboardController extends Controller
 		]);
 	}
 
-	private $ascending;
-
-	public function __construct()
-	{
-		$this->ascending = collect([
-			'country'   => 0,
-			'confirmed' => 0,
-			'deaths'    => 0,
-			'recovered' => 0,
-		]);
-	}
-
 	public function showByCountry(Request $request): View
 	{
 		$username = auth()->user()->username;
 
-		$sortBy = $request->sortBy;
-		$sortBy && $this->ascending[$sortBy] = $request->ascending;
+		$ascending = collect([
+			'country'   => $request->sortBy === 'country' ? $request->ascending : 0,
+			'confirmed' => $request->sortBy === 'confirmed' ? $request->ascending : 0,
+			'deaths'    => $request->sortBy === 'deaths' ? $request->ascending : 0,
+			'recovered' => $request->sortBy === 'recovered' ? $request->ascending : 0,
+		]);
 
-		$sortBy
-			? ($this->ascending[$sortBy] % 2 !== 0
-				? $covidStatisticsData = CovidStatistic::all()->sortBy($sortBy)
-				: $covidStatisticsData = CovidStatistic::all()->sortByDesc($sortBy))
+		$request->sortBy
+			? ($request->ascending % 2 !== 0
+				? $covidStatisticsData = CovidStatistic::all()->sortBy($request->sortBy)
+				: $covidStatisticsData = CovidStatistic::all()->sortByDesc($request->sortBy))
 			: $covidStatisticsData = CovidStatistic::all();
 
 		return view('dashboard.by-country', [
 			'username'                   => $username,
 			'covidStatisticsData'        => $covidStatisticsData,
-			'ascending'                  => $this->ascending,
+			'ascending'                  => $ascending,
 		]);
 	}
 }

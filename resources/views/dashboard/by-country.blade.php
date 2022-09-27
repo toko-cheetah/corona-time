@@ -3,10 +3,41 @@
 
     <table class="relative mt-6 lg:mt-10 text-center w-full shadow-card-shadow">
         <tr class="bg-gray-100 sticky top-0">
-            <x-dashboard.table-heading>{{ __('dashboard.location') }}</x-dashboard.table-heading>
-            <x-dashboard.table-heading>{{ __('dashboard.new_cases') }}</x-dashboard.table-heading>
-            <x-dashboard.table-heading>{{ __('dashboard.death') }}</x-dashboard.table-heading>
-            <x-dashboard.table-heading>{{ __('dashboard.recovered') }}</x-dashboard.table-heading>
+            <x-dashboard.table-heading>
+                <x-dashboard.sorting-form 
+                    sortByValue="country"
+                    ascendingKey="{{ $ascending['country'] }}"
+                >
+                    {{ __('dashboard.location') }}
+                </x-dashboard.sorting-form>
+            </x-dashboard.table-heading>
+
+            <x-dashboard.table-heading>
+                <x-dashboard.sorting-form 
+                    sortByValue="confirmed"
+                    ascendingKey="{{ $ascending['confirmed'] }}"
+                >
+                    {{ __('dashboard.new_cases') }}
+                </x-dashboard.sorting-form>
+            </x-dashboard.table-heading>
+
+            <x-dashboard.table-heading>
+                <x-dashboard.sorting-form 
+                    sortByValue="deaths"
+                    ascendingKey="{{ $ascending['deaths'] }}"
+                >
+                    {{ __('dashboard.death') }}
+                </x-dashboard.sorting-form>
+            </x-dashboard.table-heading>
+
+            <x-dashboard.table-heading>
+                <x-dashboard.sorting-form 
+                    sortByValue="recovered"
+                    ascendingKey="{{ $ascending['recovered'] }}"
+                >
+                    {{ __('dashboard.recovered') }}
+                </x-dashboard.sorting-form>
+            </x-dashboard.table-heading>
         </tr>
         
         @if ($covidStatisticsData)                

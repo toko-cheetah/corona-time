@@ -1,1 +1,1 @@
-<td class="py-4">{{ $slot }}</td>
+<td class="py-4 break-all">{{ $slot }}</td>

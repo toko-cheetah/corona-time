@@ -1,4 +1,4 @@
-<x-dashboard.layout user="{{ $user }}" heading="{{ __('dashboard.worldwide_statistics') }}">
+<x-dashboard.layout user="{{ $username }}" heading="{{ __('dashboard.worldwide_statistics') }}">
     <div class="flex flex-wrap gap-4 lg:gap-6">
         <x-dashboard.card class="w-full lg:w-auto bg-blue-700/10">
             <x-icons.charts.new-cases />

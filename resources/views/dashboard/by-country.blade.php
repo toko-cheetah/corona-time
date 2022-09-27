@@ -1,4 +1,4 @@
-<x-dashboard.layout user="{{ $user }}" heading="{{ __('dashboard.statistics_by_country') }}">
+<x-dashboard.layout user="{{ $username }}" heading="{{ __('dashboard.statistics_by_country') }}">
     <p>Search by country</p>
 
     <table class="relative mt-6 lg:mt-10 text-center w-full shadow-card-shadow">

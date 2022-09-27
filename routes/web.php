@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['controller' => DashboardController::class], function () {
-	Route::middleware(['auth', 'verified'])->group(function () {
-		Route::get('/', 'showWorldwide')->name('home');
-		Route::get('/by-country', 'showByCountry')->name('home.by_country');
-	});
+Route::group(['controller' => DashboardController::class, 'middleware' => ['auth', 'verified']], function () {
+	Route::get('/', 'showWorldwide')->name('home');
+	Route::get('/by-country', 'showByCountry')->name('home.by_country');
 });
 
 Route::middleware('guest')->group(function () {

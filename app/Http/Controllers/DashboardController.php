@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CovidStatistic;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class DashboardController extends Controller
 {
@@ -27,23 +28,37 @@ class DashboardController extends Controller
 	{
 		$username = auth()->user()->username;
 
-		$ascending = collect([
-			'country'   => $request->sortBy === 'country' ? $request->ascending : 0,
-			'confirmed' => $request->sortBy === 'confirmed' ? $request->ascending : 0,
-			'deaths'    => $request->sortBy === 'deaths' ? $request->ascending : 0,
-			'recovered' => $request->sortBy === 'recovered' ? $request->ascending : 0,
+		$countClicks = collect([
+			'country'   => $request->sortBy === 'country' ? $request->countClicks : 0,
+			'confirmed' => $request->sortBy === 'confirmed' ? $request->countClicks : 0,
+			'deaths'    => $request->sortBy === 'deaths' ? $request->countClicks : 0,
+			'recovered' => $request->sortBy === 'recovered' ? $request->countClicks : 0,
 		]);
 
-		$request->sortBy
-			? ($request->ascending % 2 !== 0
-				? $covidStatisticsData = CovidStatistic::all()->sortBy($request->sortBy)
-				: $covidStatisticsData = CovidStatistic::all()->sortByDesc($request->sortBy))
-			: $covidStatisticsData = CovidStatistic::all();
+		$countryArray = collect([]);
+
+		foreach (CovidStatistic::all() as $country)
+		{
+			Str::contains(
+				Str::remove(' ', strtolower($country->country)),
+				preg_replace('/\s|\./mi', '', strtolower($request->search))
+			)
+				&& $countryArray->push($country->country);
+		}
+
+		$request->search
+			? $covidStatisticsData = CovidStatistic::all()->whereIn('country', $countryArray)
+			: ($request->sortBy
+				? ($request->countClicks % 2 !== 0
+					? $covidStatisticsData = CovidStatistic::all()->sortBy($request->sortBy)
+					: $covidStatisticsData = CovidStatistic::all()->sortByDesc($request->sortBy))
+				: $covidStatisticsData = CovidStatistic::all());
 
 		return view('dashboard.by-country', [
-			'username'                   => $username,
-			'covidStatisticsData'        => $covidStatisticsData,
-			'ascending'                  => $ascending,
+			'username'              => $username,
+			'covidStatisticsData'   => $covidStatisticsData,
+			'countClicks'           => $countClicks,
+			'searchValue'           => $request->search,
 		]);
 	}
 }

@@ -42,7 +42,7 @@ Coronatime - is a platform where we can register, go through authorization (as w
 1\. First of all you need to clone Coronatime repository from github:
 
 ```sh
-git clone https://github.com/RedberryInternship/tornike-khatiashvili-corona-time.git
+git clone https://github.com/toko-cheetah/corona-time.git
 ```
 
 2\. Next step requires you to run _composer install_ in order to install all the dependencies.
@@ -146,10 +146,6 @@ it will watch JS files and on change it'll rebuild them, so you don't have to ma
 
 ### Resources
 
--   https://corona-time.tornike-khatiashvili.redberryinternship.ge/
-
 -   https://drawsql.app/teams/tornikes-team/diagrams/coronatime
-
--   https://www.figma.com/file/O9A950iYrHgZHtBuCtNSY8/Coronatime?node-id=0%3A1
 
 -   https://devtest.ge/api
